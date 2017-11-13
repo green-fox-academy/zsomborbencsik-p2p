@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -15,19 +18,19 @@ public class Logger {
 
     String path;
     String method;
-    Date date;
+    String date;
     String logLevel;
     String requestData;
 
     public Logger() {
     }
 
-    public Logger(String path, String method, Date date, String logLevel, String requestData) {
-        this.path = path;
-        this.method = method;
-        this.date = date;
-        this.logLevel = logLevel;
-        this.requestData = requestData;
+    public Logger(HttpServletRequest request){
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        this.logLevel = System.getenv("CHAT_APP_LOGLEVEL");
+        this.path = request.getServletPath();
+        this.method = request.getMethod();
+        this.requestData = request.getQueryString();
     }
 
     public int getId() {
@@ -54,11 +57,11 @@ public class Logger {
         this.method = method;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -76,5 +79,15 @@ public class Logger {
 
     public void setRequestData(String requestData) {
         this.requestData = requestData;
+    }
+
+    public String getLogger() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(date).append(" ")
+                .append(logLevel).append(" ")
+                .append(path).append(" ")
+                .append(method).append(" ")
+                .append(method);
+        return sb.toString();
     }
 }

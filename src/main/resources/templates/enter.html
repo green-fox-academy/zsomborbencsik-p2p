@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Enter Username</h1>
-<form th:action="@{/update}" th:object="${newUser}" method="post">
+<form th:action="@{/addUser}" th:object="${newUser}" method="post">
     <input type="text" th:field="*{name}" name="name"/>
     <span th:if="${errorMessage}" th:text="${errorMessage}"/>
     <span th:if="${errorMessage2}" th:text="${errorMessage2}"/>

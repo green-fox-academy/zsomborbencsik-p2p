@@ -2,6 +2,7 @@ package com.greenfox.chatapp.services;
 
 import com.greenfox.chatapp.model.Logger;
 import com.greenfox.chatapp.model.Message;
+import com.greenfox.chatapp.model.Userka;
 import com.greenfox.chatapp.repositories.LoggerRepository;
 import com.greenfox.chatapp.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ public class MessageService {
 
     @Autowired
     MessageRepository messageRepository;
+
+    @Autowired
+    UserService userService;
 
     public Iterable<Message> findAllUser() {
         return messageRepository.findAll();
@@ -26,5 +30,9 @@ public class MessageService {
 
     public void setMessageRepository(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
+    }
+
+    public void saveDatabase(Message message) {
+        messageRepository.save(message);
     }
 }

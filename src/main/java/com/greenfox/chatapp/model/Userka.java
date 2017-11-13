@@ -14,7 +14,6 @@ public class Userka {
 
     String name;
 
-
     public Userka(String name) {
         this.name = name;
     }

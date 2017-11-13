@@ -35,6 +35,9 @@ public class UserService {
     public Iterable<Userka> findAllUser() {
         return userRepository.findAll();
     }
+    public Userka getUserka () {
+        return userRepository.findOne(1);
+    }
 
     public void addUser(Userka userka) {
         userRepository.save(userka);
@@ -52,7 +55,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-
-
-
+    public void updateUserka(Userka userka) {
+        userRepository.save(userka);
+    }
+    public void deleteUserka(int id) {
+        userRepository.delete(id);
+    }
 }

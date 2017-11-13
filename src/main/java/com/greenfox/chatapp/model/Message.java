@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -20,11 +22,9 @@ public class Message {
     Date messageCreated;
     int randomId;
 
-    public Message(User username, String text) {
-        this.username = username.getUsername();
-        this.text = text;
-        this.messageCreated = messageCreated;
-        this.randomId = randomId;
+    public Message() {
+        LocalDate localDate = LocalDate.now();
+        this.messageCreated = java.sql.Date.valueOf(localDate);
     }
 
     public int getId() {
@@ -66,4 +66,5 @@ public class Message {
     public void setRandomId(int randomId) {
         this.randomId = randomId;
     }
+
 }

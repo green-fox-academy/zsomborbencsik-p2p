@@ -61,4 +61,30 @@ public class UserService {
     public void deleteUserka(int id) {
         userRepository.delete(id);
     }
+
+    public boolean checkIfUsernameIsTaken(String username) {
+        for (int i = 0; i < getAllUserka().size(); i++) {
+            if (findUserById(i).getName().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getErrormessage(Userka user) {
+        if (user.getName().equals("")) {
+            return "Add username plzzzz";
+        } else if (checkIfUsernameIsTaken(user.getName())) {
+            return "Username is already taken";
+        } else if (user.getName().equals("csunyaszo")) {
+            return "Bad bad user";
+        }
+        return null;
+    }
+    public boolean checkIfInputOk (Userka user) {
+        if (user.getName().equals("") || checkIfUsernameIsTaken(user.getName()) || user.getName().equals("csunyaszo")) {
+            return true;
+        }
+        return false;
+    }
 }

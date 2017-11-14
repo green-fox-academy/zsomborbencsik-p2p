@@ -7,35 +7,41 @@
 <body>
 <h1>Peer to peer chat program</h1>
 
-<p>Your username: </p>
+<div th:if="${user == null}">
+<h2><a th:href="@{/enter}">Register</a></h2>
+</div>
 
-<form th:action="@{/updateUserName}" th:object="${user}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="text" th:field="*{name}" th:value="${user.name}" name="name"/>
-    <button type="submit" value="Submit">Change</button>
-</form>
+<div th:if="${user != null}">
+    <form th:action="@{/updateUserName}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{name}" th:value="${user.name}" name="name"/>
+        <button type="submit" value="Submit">Change</button>
+    </form>
 
-<form th:action="@{/addMessage}" th:object="${newMessage}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="text" th:field="*{text}" name="name"/>
-    <button type="submit" value="Submit">Send</button>
-</form>
+    <form th:action="@{/addMessage}" th:object="${newMessage}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{text}" name="name"/>
+        <button type="submit" value="Submit">Send</button>
+    </form>
 
-<th:block th:each="message : ${messages}">
-    <tr>
-        <ul>
-            <li>
-        <td th:text="${message.text}">...</td>
-            </li>
-            <li>
-        <td th:text="${message.username}">...</td>
-            </li>
-            <li>
-        <td th:text="${message.messageCreated}">...</td>
-            </li>
-        </ul>
-    </tr>
-</th:block>
+    <th:block th:each="message : ${messages}">
+        <tr>
+            <ul>
+                <li>
+                    <td th:text="${message.text}">...</td>
+                </li>
+                <li>
+                    <td th:text="${message.username}">...</td>
+                </li>
+                <li>
+                    <td th:text="${message.messageCreated}">...</td>
+                </li>
+            </ul>
+        </tr>
+    </th:block>
+</div>
+
+
 
 </body>
 </html>

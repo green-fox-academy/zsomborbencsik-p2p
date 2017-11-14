@@ -50,20 +50,18 @@ public class MainController {
         return "index";
     }
 
-
     @PostMapping("/addUser")
     public String updateEntry(@ModelAttribute Userka user, Model model, HttpServletRequest request){
         loggerService.printLog(request);
-        if (user.getName().equals("")) {
-            model.addAttribute("errorMessage", "Add username plzzzz");
-            return "enter";
-        } else if (user.getName().equals("csunyaszo")) {
-            model.addAttribute("errorMessage2","Bad bad user");
+        if (userService.checkIfInputOk(user)) {
+            model.addAttribute("newUser",user);
+            model.addAttribute("errorMessage", userService.getErrormessage(user));
             return "enter";
         }
         userService.saveDatabase(user);
         return "redirect:/";
     }
+
     @RequestMapping("/enter")
     public String getEnterPage(Model model) {
         model.addAttribute("newUser", userService.getNewUser());

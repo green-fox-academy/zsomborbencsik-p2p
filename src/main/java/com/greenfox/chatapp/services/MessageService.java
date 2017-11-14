@@ -1,13 +1,15 @@
 package com.greenfox.chatapp.services;
 
-import com.greenfox.chatapp.model.Logger;
-import com.greenfox.chatapp.model.Message;
-import com.greenfox.chatapp.model.Userka;
+import com.greenfox.chatapp.ChatappApplication;
+import com.greenfox.chatapp.model.*;
 import com.greenfox.chatapp.repositories.LoggerRepository;
 import com.greenfox.chatapp.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import javax.xml.ws.Holder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,5 +49,12 @@ public class MessageService {
 
     public void saveDatabase(Message message) {
         messageRepository.save(message);
+    }
+
+    public Status sendMessage(Message message, Client client) {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<Wrapper> request = new HttpEntity<>(new Wrapper(message,client));
+        Status response = restTemplate.postForObject(ChatappApplication.CHAT_APP_PEER_ADDRESS, request, Status.class);
+        return response;
     }
 }

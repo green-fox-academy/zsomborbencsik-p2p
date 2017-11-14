@@ -1,7 +1,9 @@
 package com.greenfox.chatapp.controllers;
 
 
+import com.greenfox.chatapp.ChatappApplication;
 import com.greenfox.chatapp.ErrorMessage;
+import com.greenfox.chatapp.model.Client;
 import com.greenfox.chatapp.model.Message;
 import com.greenfox.chatapp.model.Userka;
 import com.greenfox.chatapp.repositories.MessageRepository;
@@ -9,6 +11,7 @@ import com.greenfox.chatapp.repositories.UserRepository;
 import com.greenfox.chatapp.services.LoggerService;
 import com.greenfox.chatapp.services.MessageService;
 import com.greenfox.chatapp.services.UserService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 public class MainController {
@@ -34,6 +38,8 @@ public class MainController {
 
     @Autowired
     MessageRepository messageRepository;
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @RequestMapping("/")
     public String getHomepage(Model model, HttpServletRequest request) {
@@ -77,5 +83,13 @@ public class MainController {
         messageService.saveDatabase(message);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/{userId}/addmessage")
+    public String addMessage(@PathVariable Integer userId, @ModelAttribute Message message, HttpServletRequest request) {
+        messageService.saveDatabase(message);
+        messageService.sendMessage(message,new Client(ChatappApplication.CHAT_APP_UNIQUE_ID));
+        logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
+        return "redirect:/index?userId=" + userId;
     }
 }

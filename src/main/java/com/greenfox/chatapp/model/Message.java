@@ -15,23 +15,30 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    Integer id;
 
     String username;
     String text;
     Date messageCreated;
-    int randomId;
+    Integer randomId;
 
     public Message() {
         LocalDate localDate = LocalDate.now();
         this.messageCreated = java.sql.Date.valueOf(localDate);
+        this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
-    public int getId() {
+    public Message(String username, String text) {
+        this.username = username;
+        this.text = text;
+        this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,11 +66,11 @@ public class Message {
         this.messageCreated = messageCreated;
     }
 
-    public int getRandomId() {
+    public Integer getRandomId() {
         return randomId;
     }
 
-    public void setRandomId(int randomId) {
+    public void setRandomId(Integer randomId) {
         this.randomId = randomId;
     }
 

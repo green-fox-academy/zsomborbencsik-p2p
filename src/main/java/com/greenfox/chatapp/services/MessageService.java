@@ -33,7 +33,7 @@ public class MessageService {
         return messages;
     }
 
-    public void deleteMessage(String username,int id) {
+    public void deleteMessage(String username,Integer id) {
         messageRepository.findByUsername(username).remove(id);
     }
 

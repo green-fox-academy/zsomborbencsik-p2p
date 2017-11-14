@@ -1,9 +1,7 @@
 package com.greenfox.chatapp.model;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Userka {
@@ -13,6 +11,9 @@ public class Userka {
     int id;
 
     String name;
+
+    @ManyToOne
+    Message userMessage;
 
     public Userka(String name) {
         this.name = name;
@@ -29,6 +30,14 @@ public class Userka {
             return false;
         }
         return true;
+    }
+
+    public Message getUserMessage() {
+        return userMessage;
+    }
+
+    public void setUserMessage(Message userMessage) {
+        this.userMessage = userMessage;
     }
 
     public void setId(int id) {

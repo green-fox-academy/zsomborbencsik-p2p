@@ -9,6 +9,8 @@
 
 <p>Your username: </p>
 
+<span th:class="${user == null} ?  th:href="@{/enter}" : >
+    </span>
 <form th:action="@{/updateUserName}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{id}"/>
     <input type="text" th:field="*{name}" th:value="${user.name}" name="name"/>

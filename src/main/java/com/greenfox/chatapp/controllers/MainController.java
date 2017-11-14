@@ -44,10 +44,10 @@ public class MainController {
         return "index";
     }
 
+
     @PostMapping("/addUser")
     public String updateEntry(@ModelAttribute Userka user, Model model, HttpServletRequest request){
         loggerService.printLog(request);
-        model.addAttribute("newUser", user);
         if (user.getName().equals("")) {
             model.addAttribute("errorMessage", "Add username plzzzz");
             return "enter";
@@ -58,18 +58,17 @@ public class MainController {
         userService.saveDatabase(user);
         return "redirect:/";
     }
+    @RequestMapping("/enter")
+    public String getEnterPage(Model model) {
+        model.addAttribute("newUser", userService.getNewUser());
+        return "enter";
+    }
 
     @PostMapping("/updateUserName")
     public String updateUsername(@ModelAttribute Userka user, HttpServletRequest request) {
         loggerService.printLog(request);
         userService.updateUserka(user);
         return "redirect:/";
-    }
-
-    @RequestMapping("/enter")
-    public String getEnterPage(Model model) {
-        model.addAttribute("newUser", userService.getNewUser());
-        return "enter";
     }
 
     @PostMapping("/addMessage")

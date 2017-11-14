@@ -8,6 +8,9 @@ import com.greenfox.chatapp.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MessageService {
 
@@ -22,6 +25,16 @@ public class MessageService {
     }
 
     public MessageService() {
+    }
+
+    public List<Message> findAllMessageByUsername(String username) {
+        List<Message> messages = new ArrayList<>();
+        messageRepository.findByUsername(username).forEach(messages::add);
+        return messages;
+    }
+
+    public void deleteMessage(String username,int id) {
+        messageRepository.findByUsername(username).remove(id);
     }
 
     public MessageRepository getMessageRepository() {

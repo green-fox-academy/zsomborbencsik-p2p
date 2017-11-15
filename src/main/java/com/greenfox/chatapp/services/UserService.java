@@ -63,7 +63,7 @@ public class UserService {
 
     public boolean checkIfUsernameIsTaken(String username) {
         for (int i = 0; i < getAllUserka().size(); i++) {
-            if (findUserById(i).getUserName().equals(username)) {
+            if (findUserById(i).getUsername().equals(username)) {
                 return true;
             }
         }
@@ -71,17 +71,17 @@ public class UserService {
     }
 
     public String getErrormessage(Userka user) {
-        if (user.getUserName().equals("")) {
+        if (user.getUsername().equals("")) {
             return "Add username plzzzz";
-        } else if (checkIfUsernameIsTaken(user.getUserName())) {
+        } else if (checkIfUsernameIsTaken(user.getUsername())) {
             return "Username is already taken";
-        } else if (user.getUserName().equals("csunyaszo")) {
+        } else if (user.getUsername().equals("csunyaszo")) {
             return "Bad bad user";
         }
         return null;
     }
     public boolean checkIfInputOk (Userka user) {
-        if (user.getUserName().equals("") || checkIfUsernameIsTaken(user.getUserName()) || user.getUserName().equals("csunyaszo")) {
+        if (user.getUsername().equals("") || checkIfUsernameIsTaken(user.getUsername()) || user.getUsername().equals("csunyaszo")) {
             return true;
         }
         return false;

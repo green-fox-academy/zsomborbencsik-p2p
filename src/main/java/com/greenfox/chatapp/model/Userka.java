@@ -9,13 +9,13 @@ public class Userka {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
-    String userName;
+    String username;
 
     @ManyToOne
     Message userMessage;
 
-    public Userka(String userName) {
-        this.userName = userName;
+    public Userka(String username) {
+        this.username = username;
     }
 
     public Userka() {
@@ -25,7 +25,7 @@ public class Userka {
         return id;
     }
     public boolean checkIfHasUsername() {
-        if (this.userName.equals("")) {
+        if (this.username.equals("")) {
             return false;
         }
         return true;
@@ -43,11 +43,11 @@ public class Userka {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -33,6 +33,14 @@
     </form>
     </div>
 
+    <form action="#" th:action="@{/messages/send}" th:object="${userAddress}" method="post">
+        <select name="id" >
+            <option value="0">Kriszti</option>
+            <option value="1">Tamas</option>
+        </select>
+        <p><input type="submit" value="Save"/></p>
+    </form>
+
 
     <th:block th:each="message : ${messages}">
         <tr>

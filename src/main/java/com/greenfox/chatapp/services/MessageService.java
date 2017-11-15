@@ -62,7 +62,7 @@ public class MessageService {
 
     public Status sendMessage(Message message) {
         RestTemplate template = new RestTemplate();
-        String url = "https://chatfactory.herokuapp.com/api/message/receive";
+        String url = "https://pkrisz0chatapp.herokuapp.com/api/message/receive";
         Wrapper sendIt = new Wrapper(message, new Client());
         HttpEntity<Wrapper> httpEntity = new HttpEntity<>(sendIt);
         Status response = template.postForObject(url, httpEntity, Status.class);

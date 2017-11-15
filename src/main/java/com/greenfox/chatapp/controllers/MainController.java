@@ -29,6 +29,7 @@ public class MainController {
     @Autowired
     MessageRepository messageRepository;
 
+
     @RequestMapping("/")
     public String getHomepage(Model model, HttpServletRequest request) {
         loggerService.printLog(request);
@@ -65,7 +66,6 @@ public class MainController {
 
     @PostMapping("/addMessage")
     public String addMessage(@ModelAttribute Message message, Model model) {
-        message.setUsername(userService.getUserka().getUserName());
         messageService.saveDatabase(message);
         return "redirect:/";
     }

@@ -26,12 +26,11 @@ public class Message {
         LocalDate localDate = LocalDate.now();
         this.messageCreated = java.sql.Date.valueOf(localDate);
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
-        this.userName = System.getenv("CHAT_APP_UNIQUE_ID");
-
+        this.userName = "Zmannn";
     }
 
     public Message(String text) {
-        this.userName = System.getenv("CHAT_APP_UNIQUE_ID");
+        this.userName = "Zmannnn";
         this.text = text;
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }

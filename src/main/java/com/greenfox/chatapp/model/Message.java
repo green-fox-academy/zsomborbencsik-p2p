@@ -26,12 +26,11 @@ public class Message {
         LocalDate localDate = LocalDate.now();
         this.messageCreated = java.sql.Date.valueOf(localDate);
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
-        this.userName = "Zmannn";
     }
 
-    public Message(String text) {
-        this.userName = "Zmannnn";
+    public Message(String text,String userName) {
         this.text = text;
+        this.userName = userName;
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
@@ -43,12 +42,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String username) {
-        this.userName = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public String getText() {

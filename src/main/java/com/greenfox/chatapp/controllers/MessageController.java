@@ -26,7 +26,7 @@ public class MessageController {
     @PostMapping("/api/message/receive")
     @CrossOrigin("*")
     public Object recieveMessage(@RequestBody Wrapper wrapper) {
-        if (wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUsername() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null) {
+        if (wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUserName() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null) {
             return new Status("error", "you fucked up something");
         }
         messageService.saveDatabase(wrapper.getMessage());

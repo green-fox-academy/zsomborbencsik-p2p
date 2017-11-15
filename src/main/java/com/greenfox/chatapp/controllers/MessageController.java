@@ -37,6 +37,4 @@ public class MessageController {
     public void deleteUserka(@PathVariable Integer id,@PathVariable String username) {
         messageService.deleteMessage(username,id);
     }
-
-
 }

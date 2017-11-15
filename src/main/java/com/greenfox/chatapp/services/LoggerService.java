@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 @Service
 public class LoggerService {
@@ -13,15 +14,15 @@ public class LoggerService {
     @Autowired
     LoggerRepository loggerRepository;
 
-    public Iterable<Logger> findAllUser() {
-        return loggerRepository.findAll();
-    }
-
     public LoggerService() {
     }
 
     public LoggerRepository getLoggerRepository() {
         return loggerRepository;
+    }
+
+    public Iterable<Logger> listAllLoggers() {
+        return loggerRepository.findAll();
     }
 
     public void setLoggerRepository(LoggerRepository loggerRepository) {

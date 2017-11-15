@@ -4,7 +4,6 @@ public class Client {
     String id;
 
     public Client() {
-
     }
 
     public Client(String id) {

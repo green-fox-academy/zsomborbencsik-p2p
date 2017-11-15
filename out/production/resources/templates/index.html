@@ -25,7 +25,7 @@
 
     <div class="form-group">
         <label for="comment">Message</label>
-    <form th:action="@{/addMessage}" th:object="${newMessage}" method="post">
+    <form th:action="@{/messages/send}" th:object="${newMessage}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <!--<input type="text" th:field="*{text}" name="name"/>-->
         <textarea class="form-control" rows="2" id="comment" th:field="*{text}" name="name"/>

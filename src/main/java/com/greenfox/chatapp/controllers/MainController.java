@@ -39,8 +39,6 @@ public class MainController {
     @Autowired
     MessageRepository messageRepository;
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainController.class);
-
     @RequestMapping("/")
     public String getHomepage(Model model, HttpServletRequest request) {
         loggerService.printLog(request);
@@ -79,15 +77,14 @@ public class MainController {
     public String addMessage(@ModelAttribute Message message, Model model) {
         message.setUsername(userService.getUserka().getName());
         messageService.saveDatabase(message);
-
         return "redirect:/";
     }
 
-    @PostMapping("/{userId}/addmessage")
-    public String addMessage(@PathVariable Integer userId, @ModelAttribute Message message, HttpServletRequest request) {
+    @PostMapping("/messages/send")
+    public String sendMessage(@ModelAttribute Message message) {
+        message.setUsername(userService.getUserka().getName());
         messageService.saveDatabase(message);
-        messageService.sendMessage(message,new Client(ChatappApplication.CHAT_APP_UNIQUE_ID));
-        logger.info("Request" + " " + request.getServletPath() + " " + request.getMethod() + " " + request.getQueryString());
-        return "redirect:/index?userId=" + userId;
+        messageService.sendMessage(message);
+        return "redirect:/";
     }
 }

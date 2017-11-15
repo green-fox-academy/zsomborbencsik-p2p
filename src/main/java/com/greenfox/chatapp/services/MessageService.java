@@ -6,6 +6,8 @@ import com.greenfox.chatapp.repositories.LoggerRepository;
 import com.greenfox.chatapp.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -47,14 +49,23 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
+    public boolean checkIfInputOk(Wrapper wrapper) {
+        if ((wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUsername() == null || wrapper.getMessage().getText() ==        null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null)) {
+            return false;
+        }
+        return true;
+    }
+
     public void saveDatabase(Message message) {
         messageRepository.save(message);
     }
 
-    public Status sendMessage(Message message, Client client) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Wrapper> request = new HttpEntity<>(new Wrapper(message,client));
-        Status response = restTemplate.postForObject(ChatappApplication.CHAT_APP_PEER_ADDRESS, request, Status.class);
+    public Status sendMessage(Message message) {
+        RestTemplate template = new RestTemplate();
+        String url = System.getenv("CHAT_APP_PEER_ADDRESS");
+        Wrapper sendIt = new Wrapper(message, new Client());
+        HttpEntity<Wrapper> httpEntity = new HttpEntity<>(sendIt);
+        Status response = template.postForObject(url, httpEntity, Status.class);
         return response;
     }
 }

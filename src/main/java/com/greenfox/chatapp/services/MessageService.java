@@ -33,12 +33,12 @@ public class MessageService {
 
     public List<Message> findAllMessageByUsername(String username) {
         List<Message> messages = new ArrayList<>();
-        messageRepository.findByUsername(username).forEach(messages::add);
+        messageRepository.findByUserName(username).forEach(messages::add);
         return messages;
     }
 
     public void deleteMessage(String username,Integer id) {
-        messageRepository.findByUsername(username).remove(id);
+        messageRepository.findByUserName(username).remove(id);
     }
 
     public MessageRepository getMessageRepository() {
@@ -62,7 +62,7 @@ public class MessageService {
 
     public Status sendMessage(Message message) {
         RestTemplate template = new RestTemplate();
-        String url = System.getenv("CHAT_APP_PEER_ADDRESS");
+        String url = "https://chatfactory.herokuapp.com/api/message/receive";
         Wrapper sendIt = new Wrapper(message, new Client());
         HttpEntity<Wrapper> httpEntity = new HttpEntity<>(sendIt);
         Status response = template.postForObject(url, httpEntity, Status.class);

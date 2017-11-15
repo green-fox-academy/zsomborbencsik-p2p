@@ -2,7 +2,6 @@ package com.greenfox.chatapp.services;
 
 import com.greenfox.chatapp.model.Userka;
 import com.greenfox.chatapp.repositories.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +63,7 @@ public class UserService {
 
     public boolean checkIfUsernameIsTaken(String username) {
         for (int i = 0; i < getAllUserka().size(); i++) {
-            if (findUserById(i).getName().equals(username)) {
+            if (findUserById(i).getUserName().equals(username)) {
                 return true;
             }
         }
@@ -72,17 +71,17 @@ public class UserService {
     }
 
     public String getErrormessage(Userka user) {
-        if (user.getName().equals("")) {
+        if (user.getUserName().equals("")) {
             return "Add username plzzzz";
-        } else if (checkIfUsernameIsTaken(user.getName())) {
+        } else if (checkIfUsernameIsTaken(user.getUserName())) {
             return "Username is already taken";
-        } else if (user.getName().equals("csunyaszo")) {
+        } else if (user.getUserName().equals("csunyaszo")) {
             return "Bad bad user";
         }
         return null;
     }
     public boolean checkIfInputOk (Userka user) {
-        if (user.getName().equals("") || checkIfUsernameIsTaken(user.getName()) || user.getName().equals("csunyaszo")) {
+        if (user.getUserName().equals("") || checkIfUsernameIsTaken(user.getUserName()) || user.getUserName().equals("csunyaszo")) {
             return true;
         }
         return false;

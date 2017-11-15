@@ -1,28 +1,18 @@
 package com.greenfox.chatapp.controllers;
 
 
-import com.greenfox.chatapp.ChatappApplication;
-import com.greenfox.chatapp.ErrorMessage;
-import com.greenfox.chatapp.model.Client;
 import com.greenfox.chatapp.model.Message;
 import com.greenfox.chatapp.model.Userka;
 import com.greenfox.chatapp.repositories.MessageRepository;
-import com.greenfox.chatapp.repositories.UserRepository;
 import com.greenfox.chatapp.services.LoggerService;
 import com.greenfox.chatapp.services.MessageService;
 import com.greenfox.chatapp.services.UserService;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 public class MainController {
@@ -75,14 +65,13 @@ public class MainController {
 
     @PostMapping("/addMessage")
     public String addMessage(@ModelAttribute Message message, Model model) {
-        message.setUsername(userService.getUserka().getName());
+        message.setUsername(userService.getUserka().getUserName());
         messageService.saveDatabase(message);
         return "redirect:/";
     }
 
     @PostMapping("/messages/send")
     public String sendMessage(@ModelAttribute Message message) {
-        message.setUsername(userService.getUserka().getName());
         messageService.saveDatabase(message);
         messageService.sendMessage(message);
         return "redirect:/";

@@ -17,7 +17,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    String username;
+    String userName;
     String text;
     Date messageCreated;
     Integer randomId;
@@ -26,10 +26,12 @@ public class Message {
         LocalDate localDate = LocalDate.now();
         this.messageCreated = java.sql.Date.valueOf(localDate);
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
+        this.userName = System.getenv("CHAT_APP_UNIQUE_ID");
+
     }
 
-    public Message(String username, String text) {
-        this.username = username;
+    public Message(String text) {
+        this.userName = System.getenv("CHAT_APP_UNIQUE_ID");
         this.text = text;
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
@@ -43,11 +45,11 @@ public class Message {
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getText() {

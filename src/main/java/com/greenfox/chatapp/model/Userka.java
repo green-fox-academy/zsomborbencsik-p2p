@@ -1,7 +1,6 @@
 package com.greenfox.chatapp.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Userka {
@@ -10,13 +9,13 @@ public class Userka {
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
 
-    String name;
+    String userName;
 
     @ManyToOne
     Message userMessage;
 
-    public Userka(String name) {
-        this.name = name;
+    public Userka(String userName) {
+        this.userName = userName;
     }
 
     public Userka() {
@@ -26,7 +25,7 @@ public class Userka {
         return id;
     }
     public boolean checkIfHasUsername() {
-        if (this.name.equals("")) {
+        if (this.userName.equals("")) {
             return false;
         }
         return true;
@@ -44,11 +43,11 @@ public class Userka {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

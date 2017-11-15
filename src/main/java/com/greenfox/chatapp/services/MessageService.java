@@ -45,7 +45,7 @@ public class MessageService {
     }
 
     public boolean checkIfInputOk(Wrapper wrapper) {
-        if ((wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUsername() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null)) {
+        if ((wrapper.getMessage().getTimestamp() == null || wrapper.getMessage().getUsername() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null)) {
             return false;
         }
         return true;

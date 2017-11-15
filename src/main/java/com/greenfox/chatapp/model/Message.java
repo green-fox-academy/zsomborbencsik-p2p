@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -16,18 +18,19 @@ public class Message {
 
     String username;
     String text;
-    Date messageCreated;
+    Timestamp timestamp;
     Integer randomId;
 
     public Message() {
         LocalDate localDate = LocalDate.now();
-        this.messageCreated = java.sql.Date.valueOf(localDate);
+        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
     public Message(String text,String username) {
         this.text = text;
         this.username = username;
+        this.timestamp = Timestamp.valueOf(LocalDateTime.now());
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
@@ -55,12 +58,12 @@ public class Message {
         this.text = text;
     }
 
-    public Date getMessageCreated() {
-        return messageCreated;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setMessageCreated(Date messageCreated) {
-        this.messageCreated = messageCreated;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getRandomId() {

@@ -1,17 +1,12 @@
 package com.greenfox.chatapp.services;
 
-import com.greenfox.chatapp.ChatappApplication;
 import com.greenfox.chatapp.model.*;
-import com.greenfox.chatapp.repositories.LoggerRepository;
 import com.greenfox.chatapp.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.ws.Holder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +28,12 @@ public class MessageService {
 
     public List<Message> findAllMessageByUsername(String username) {
         List<Message> messages = new ArrayList<>();
-        messageRepository.findByUserName(username).forEach(messages::add);
+        messageRepository.findByUsername(username).forEach(messages::add);
         return messages;
     }
 
     public void deleteMessage(String username,Integer id) {
-        messageRepository.findByUserName(username).remove(id);
+        messageRepository.findByUsername(username).remove(id);
     }
 
     public MessageRepository getMessageRepository() {
@@ -50,7 +45,7 @@ public class MessageService {
     }
 
     public boolean checkIfInputOk(Wrapper wrapper) {
-        if ((wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUserName() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null)) {
+        if ((wrapper.getMessage().getMessageCreated() == null || wrapper.getMessage().getUsername() == null || wrapper.getMessage().getText() == null || wrapper.getMessage().getId() == null || wrapper.getClient().getId() == null)) {
             return false;
         }
         return true;

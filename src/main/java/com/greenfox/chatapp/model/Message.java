@@ -1,13 +1,10 @@
 package com.greenfox.chatapp.model;
 
-import org.apache.catalina.User;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -17,7 +14,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    String userName;
+    String username;
     String text;
     Date messageCreated;
     Integer randomId;
@@ -28,9 +25,9 @@ public class Message {
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
-    public Message(String text,String userName) {
+    public Message(String text,String username) {
         this.text = text;
-        this.userName = userName;
+        this.username = username;
         this.randomId = (int)(Math.random() * (10000 - 1) + 1) + 1;
     }
 
@@ -42,12 +39,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getText() {

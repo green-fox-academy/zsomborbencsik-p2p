@@ -3,7 +3,7 @@
 <head>
     <title>ChatApp</title>
     <meta charset="utf-8" />
-    <meta userName="viewport" content="width=device-width, initial-scale=1"/>
+    <meta username="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
@@ -19,7 +19,7 @@
 <div th:if="${user != null}">
     <form th:action="@{/updateUserName}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
-        <input type="text" th:field="*{userName}" th:value="${user.userName}" userName="userName"/>
+        <input type="text" th:field="*{username}" th:value="${user.username}" username="username"/>
         <button type="submit" value="Submit">Change</button>
     </form>
 
@@ -27,8 +27,8 @@
         <label for="comment">Message</label>
     <form th:action="@{/messages/send}" th:object="${newMessage}" method="post">
         <input type="hidden" th:field="*{id}"/>
-        <!--<input type="text" th:field="*{text}" userName="userName"/>-->
-        <textarea class="form-control" rows="2" id="comment" th:field="*{text}" userName="userName"/>
+        <!--<input type="text" th:field="*{text}" username="username"/>-->
+        <textarea class="form-control" rows="2" id="comment" th:field="*{text}" username="username"/>
         <button type="submit" value="Submit">Send</button>
     </form>
     </div>
@@ -40,7 +40,7 @@
                     <td th:text="${message.text}">...</td>
                 </li>
                 <li>
-                    <td th:text="${message.userName}">...</td>
+                    <td th:text="${message.username}">...</td>
                 </li>
                 <li>
                     <td th:text="${message.messageCreated}">...</td>

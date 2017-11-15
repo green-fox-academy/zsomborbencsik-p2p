@@ -72,6 +72,7 @@ public class MainController {
 
     @PostMapping("/messages/send")
     public String sendMessage(@ModelAttribute Message message) {
+        message.setUsername("Atomceruza");
         messageService.saveDatabase(message);
         messageService.sendMessage(message);
         return "redirect:/";

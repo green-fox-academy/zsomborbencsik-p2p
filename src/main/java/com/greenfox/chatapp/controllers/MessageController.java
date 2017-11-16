@@ -30,6 +30,10 @@ public class MessageController {
         return new Status("ok","");
     }
 
+    @GetMapping("/api/messages")
+    public Object sendMessage() {
+        return messageService.findAllMessage();
+    }
     @RequestMapping(method = RequestMethod.POST, value = "/messages/{username}/{id}")
     public void deleteUserka(@PathVariable Integer id,@PathVariable String username) {
         messageService.deleteMessage(username,id);

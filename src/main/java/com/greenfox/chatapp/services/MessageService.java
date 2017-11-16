@@ -28,7 +28,7 @@ public class MessageService {
 
     public List<Message> findAllMessageByUsername(String username) {
         List<Message> messages = new ArrayList<>();
-        messageRepository.findByUsername(username).forEach(messages::add);
+        messageRepository.findAll().forEach(messages::add);
         return messages;
     }
 
@@ -49,6 +49,10 @@ public class MessageService {
             return false;
         }
         return true;
+    }
+
+    public Iterable<Message> findAllMessage() {
+        return messageRepository.findAll();
     }
 
     public void saveDatabase(Message message) {
